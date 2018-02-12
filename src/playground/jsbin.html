@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+    <style>
+        #yellow {
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+            position: absolute;
+        }
+
+        #red {
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <p>
+        <button id="btn">Count</button>
+        <p id='count'>0</p>
+    </p>
+    <div id='yellow'>
+        <div id='red'></div>
+    </div>
+</body>
+<script>
+    document.getElementById('btn').addEventListener('click', () => {
+        var ell = document.getElementById('yellow');
+        var el = document.getElementById('red');
+        var pos = 0;
+        var id = setInterval(frame, 25);
+
+        function pickColor() {
+            var color = '#';
+            var ch = '1234567890ABCDEF';
+            for (var i = 0; i < 6; i++) {
+                color += ch[Math.floor(Math.random() * 16)];
+            }
+            //console.log(color);
+            return color;
+        }
+        var count = 0;
+
+        function frame() {
+            if (pos === 180) {
+                clearInterval(frame);
+                document.getElementById('btn').removeAttribute('disabled');
+
+            } else {
+                var add = function () {
+
+
+                    return count += 1;
+                };
+
+                document.getElementById('count').innerHTML = add();
+
+                document.getElementById('btn').setAttribute('disabled', true);
+                el.style.backgroundColor = pickColor();
+                pos++;
+                el.style.top = pos + 'px';
+                el.style.left = pos + 'px';
+                ell.style.backgroundColor = pickColor();
+            }
+        }
+    });
+
+
+
+</script>
+</html>
+
+
+
+
